@@ -30,7 +30,7 @@ app.listen(PORT, () => {
 
 // Route to serve the todo.html file
 app.get("/todo", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "todo.html"));
+    res.sendFile(path.join(__dirname, "public", "read-todo.html"));
     console.log("Serving todo.html file");
 });
 
