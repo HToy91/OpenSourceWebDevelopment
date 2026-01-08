@@ -12,6 +12,12 @@ const PORT = 3000;
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
 
+// Route to serve static HTML file
+app.get("/index", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+    console.log("Serving index.html file");
+})
+
 // Basic GET route
 app.get("/", (req, res) => {
     res.send("Server is running");
@@ -36,4 +42,9 @@ app.get("/api/todo", (req, res) => {
         }
         res.json(JSON.parse(data));
     });
+});
+
+// Route handling for undefined routes (404)
+app.use((req, res) => {
+    res.redirect("/index");
 });
