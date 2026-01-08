@@ -1,13 +1,10 @@
-// Example of a basic fetch request
-fetch("api/course")
+fetch("api/todo")
     .then(response => response.json())
     .then(data => {
-        console.log("Data received from server:", data);
+        // console.log("Data received from server:", data);
 
-        document.getElementById("course").textContent = data.course;
-        document.getElementById("instructor").textContent = data.instructor;
-        document.getElementById("topics").innerHTML = data.topics.map(topic => `<li>${topic}</li>`).join("");
+        document.getElementById("todo-list").textContent = JSON.stringify(data, null, 2);
     })
     .catch(error => {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching todo data:", error);
     });

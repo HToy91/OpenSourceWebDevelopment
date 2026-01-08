@@ -1,11 +1,19 @@
 {
-  "name": "node",
+  "name": "opensourcewebdevelopment",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/HToy91/OpenSourceWebDevelopment#readme",
+  "bugs": {
+    "url": "https://github.com/HToy91/OpenSourceWebDevelopment/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HToy91/OpenSourceWebDevelopment.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

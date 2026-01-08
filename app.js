@@ -1,52 +1,39 @@
+// Import express library
 const express = require("express");
+// Import path module
 const path = require("path");
+// Create an instance of express
 const app = express();
+// Import file system module
 const fs = require("fs");
-const port = 3000;
+// Define the port number
+const PORT = 3000;
 
-// Serve static files from the "public" directory
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
 
 // Basic GET route
-app.get("/", (req, res)=>{
-    res.send("The server is up and running!");
+app.get("/", (req, res) => {
+    res.send("Server is running");
 });
 
-// Route to serve static HTML file
-app.get("/index", (req,res)=>{
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-    console.log("Index.html file served");
+// Start the server and listen on the defined port
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Route to secondPage.html
-app.get("/secondPage", (req,res)=>{
-    res.sendFile(path.join(__dirname, "public", "secondPage.html"));
-    console.log("SecondPage.html file served");
+// Route to serve the todo.html file
+app.get("/todo", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "todo.html"));
+    console.log("Serving todo.html file");
 });
 
-// Routes for data and date files
-// JSON API data route
-app.get("/api/data", (req,res)=>{
-    res.json({
-        message: "Hello from the server",
-        timestamp:new Date(),
-        items: ["Node.js", "Express", "npm"]
-    });
-});
-
-app.get("/api/course", (req, res)=>{
-    fs.readFile("data.json", "utf-8", (err, data)=>{
-        // If fails to read file, send error response
-        if(err){
-            res.status(500).json({error: "Failed to read data file"});
+app.get("/api/todo", (req, res) => {
+    fs.readFile(path.join(__dirname, "todo.json"), "utf8", (err, data) => {
+        if (err) {
+            res.status(500).send("Error reading todo data");
             return;
         }
-        // if successful, parse and send JSON data
         res.json(JSON.parse(data));
     });
-});
-
-// Route for running our server
-app.listen(port, ()=>{
-    console.log(`Server is running on http://localhost:${port}`)
 });
