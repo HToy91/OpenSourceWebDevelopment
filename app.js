@@ -28,10 +28,10 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Route to serve the todo.html file
+
 app.get("/todo", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "read-todo.html"));
-    console.log("Serving todo.html file");
+    res.setHeader("Content-Type", "application/json");
+    res.sendFile(path.join(__dirname, "todo.json"));
 });
 
 app.get("/api/todo", (req, res) => {
