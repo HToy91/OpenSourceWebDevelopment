@@ -10,6 +10,7 @@ const fs = require("fs");
 const PORT = 3000;
 
 // Serve static files from the 'public' directory
+// Put your static HTML, CSS, and JS files in the 'public' folder
 app.use(express.static(path.join(__dirname, "public")));
 
 // Route to serve static HTML file
