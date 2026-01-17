@@ -7,7 +7,29 @@ const app = express();
 // Import file system module
 const fs = require("fs");
 // Define the port number
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+// [Week: 2]
+require("dotenv").config();
+const mongoose = require("mongoose");
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+    console.error("MONGO_URI is not defined in environment variables");
+    process.exit(1);
+}
+
+// Connect to MongoDB
+async function connectToMongo() {
+    try {
+        await mongoose.connect(MONGO_URI);
+        console.log("Connected to MongoDB");
+    }
+    catch (err) {
+        console.error("Failed to connect to MongoDB", err.message);
+        process.exit(1);
+    }
+}
 
 // Serve static files from the 'public' directory
 // Put your static HTML, CSS, and JS files in the 'public' folder
@@ -25,9 +47,9 @@ app.get("/", (req, res) => {
 });
 
 // Start the server and listen on the defined port
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
 // Route to serve todo.json file
 app.get("/todo", (req, res) => {
