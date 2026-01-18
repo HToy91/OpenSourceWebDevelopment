@@ -47,9 +47,9 @@ app.get("/", (req, res) => {
 });
 
 // Start the server and listen on the defined port
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server is running on http://localhost:${PORT}`);
+// });
 
 // Route to serve todo.json file
 app.get("/todo", (req, res) => {
@@ -66,6 +66,53 @@ app.get("/api/todo", (req, res) => {
         res.json(JSON.parse(data));
     });
 });
+
+const todos = new mongoose.Schema({}, {strict: false});
+const todo_app = mongoose.model("todos", todos);
+
+async function loadData() {
+    try {
+        await mongoose.connect(MONGO_URI);
+        console.log("Connected to MongoDB for data loading");
+
+        // read the json file
+        const filePath = path.join(__dirname, "todo.json");
+        const rawData = fs.readFileSync(filePath);
+        const todos = JSON.parse(rawData);
+
+        // insert data into the collection
+        await todo_app.insertMany(todos);
+        console.log("Data loaded into MongoDB");
+
+        // close the connection
+        await mongoose.connection.close();
+    }
+    catch (err) {
+        console.error("Error loading data into MongoDB", err.message);
+        process.exit(1);
+    }
+}
+loadData();
+
+app.get("/api/todos", async (req, res) => {
+    const data = await todo_app.find();
+    res.json({data});
+});
+
+app.get("/api/todos/:id", async (req, res) => {
+    console.log(req.params.id);
+    const tInfo = req.params.id;
+    const todoInfo = await todo_app.find({id: tInfo});
+    console.log(todoInfo);
+    res.json({todoInfo});
+});
+
+connectToMongo()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT}`);
+        });
+    });
 
 // Route handling for undefined routes (404)
 app.use((req, res) => {
