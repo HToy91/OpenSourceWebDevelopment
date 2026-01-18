@@ -1,5 +1,7 @@
 // Make a GET request to the server to fetch todo data endpoint
-fetch("api/todo")
+
+//**** replace with fetch from /todo */
+fetch("/todo")
     // Parse the JSON response
     .then(response => response.json())
     .then(data => {

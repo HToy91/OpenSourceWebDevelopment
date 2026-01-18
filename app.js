@@ -45,11 +45,12 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
+//**** took out to replace with mongoose db */
 // Route to serve todo.json file
-app.get("/todo", (req, res) => {
-  res.setHeader("Content-Type", "application/json");
-  res.sendFile(path.join(__dirname, "todo.json"));
-});
+// app.get("/todo", (req, res) => {
+//   res.setHeader("Content-Type", "application/json");
+//   res.sendFile(path.join(__dirname, "todo.json"));
+// });
 
 app.get("/api/todo", (req, res) => {
   fs.readFile(path.join(__dirname, "todo.json"), "utf8", (err, data) => {
@@ -90,16 +91,19 @@ async function loadData() {
   }
 }
 
-app.get("/api/todos", async (req, res) => {
+app.get("/todo", async (req, res) => {
   const data = await todo_app.find();
+  console.log("Data fetched from MongoDB:");
+  res.setHeader("Content-Type", "application/json");
   res.json({ data });
 });
 
-app.get("/api/todos/:id", async (req, res) => {
+app.get("/todo/:id", async (req, res) => {
   console.log(req.params.id);
   const tInfo = req.params.id;
   const todoInfo = await todo_app.find({ id: tInfo });
   console.log(todoInfo);
+  res.setHeader("Content-Type", "application/json");
   res.json({ todoInfo });
 });
 
