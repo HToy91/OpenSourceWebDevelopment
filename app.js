@@ -25,7 +25,7 @@ async function connectToMongo() {
     await mongoose.connect(MONGO_URI);
     console.log("Connected to MongoDB");
   } catch (err) {
-    console.error("Failed to connect to MongoDB", err.message);
+    console.error("Failed to connect to MongoDB", err);
     process.exit(1);
   }
 }
@@ -87,13 +87,13 @@ async function loadData() {
     }
     console.log("Data sync completed");
   } catch (err) {
-    console.error("Error loading data into MongoDB", err.message);
+    console.error("Error loading data into MongoDB", err);
   }
 }
 
 app.get("/todo", async (req, res) => {
   const data = await todo_app.find();
-  console.log("Data fetched from MongoDB:");
+  console.log("Data fetched from MongoDB:", data);
   res.setHeader("Content-Type", "application/json");
   res.json({ data });
 });
