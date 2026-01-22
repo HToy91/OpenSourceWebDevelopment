@@ -52,15 +52,15 @@ app.get("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, "todo.json"));
 // });
 
-app.get("/api/todo", (req, res) => {
-  fs.readFile(path.join(__dirname, "todo.json"), "utf8", (err, data) => {
-    if (err) {
-      res.status(500).send("Error reading todo data");
-      return;
-    }
-    res.json(JSON.parse(data));
-  });
-});
+// app.get("/api/todo", (req, res) => {
+//   fs.readFile(path.join(__dirname, "todo.json"), "utf8", (err, data) => {
+//     if (err) {
+//       res.status(500).send("Error reading todo data");
+//       return;
+//     }
+//     res.json(JSON.parse(data));
+//   });
+// });
 
 const todos = new mongoose.Schema({
   id: { type: Number, unique: true, required: true },
