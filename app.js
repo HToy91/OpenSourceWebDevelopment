@@ -24,7 +24,8 @@ async function connectToMongo() {
   try {
     await mongoose.connect(MONGO_URI);
     console.log("Connected to MongoDB");
-  } catch (err) {
+  } 
+  catch (err) {
     console.error("Failed to connect to MongoDB", err);
     process.exit(1);
   }
@@ -86,7 +87,8 @@ async function loadData() {
       }
     }
     console.log("Data sync completed");
-  } catch (err) {
+  } 
+  catch (err) {
     console.error("Error loading data into MongoDB", err);
   }
 }
