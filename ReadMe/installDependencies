@@ -1,0 +1,7 @@
+// npm init
+// npm install express --save
+//--save creates a dependency in package.json
+// restart server automatically with nodemon
+// npm install -g nodemon for global install
+// nodemon app.js
+//  npm install --save-dev nodemon for local install
