@@ -14,9 +14,9 @@ const {engine} = require("express-handlebars"); // Import express-handlebars
 // Setup templating engine
 app.engine("hbs", engine({
     extname: ".hbs",
-    helpers: { // needed for comparison in Handlebars templates
+    helpers: { // needed for comparison in Handlebars templates. helpers are like functions that can be called from templates
         ifEquals(a, b, options) {
-            return a === b ? options.fn(this) : options.inverse(this);
+            return a === b ? options.fn(this) : options.inverse(this); // Return true block if equal, else false block
         }
     }
 })); // Register Handlebars engine
