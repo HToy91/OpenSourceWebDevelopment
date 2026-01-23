@@ -1,0 +1,7 @@
+npm init
+npm install express --save
+npm install --save-dev nodemon
+npm install dotenv --save
+npm install mongoose --save
+npm install method-override --save
+npm install express-handlebars --save
