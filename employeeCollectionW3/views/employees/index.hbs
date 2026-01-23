@@ -38,7 +38,8 @@
         <br>
         <label>
             Salary
-            <input name="salary" type="number" min="15" value="{{form.salary}}" required>
+            <input name="salary" type="number" step="0.01" min="15" value="{{form.salary}}" required>
+            <!--            use step="0.01" for cents-->
         </label>
         <br>
         <button type="submit">Create Employee</button>
@@ -70,7 +71,7 @@
                         <td>{{this.department}}</td>
                         <td>{{this.startDate}}</td>
                         <td>{{this.jobTitle}}</td>
-                        <td>{{this.salary}}</td>
+                        <td>${{this.salary}}</td>
                         <td>
                             <a href="/employees/{{this._id}}/edit">Edit</a>
                             <form action="/employees/{{this._id}}?_method=DELETE" method="POST" style="display:inline;">
