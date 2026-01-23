@@ -12,7 +12,14 @@ const employeesRouter = require("./routes/employees"); // Import employees route
 const {engine} = require("express-handlebars"); // Import express-handlebars
 
 // Setup templating engine
-app.engine("hbs", engine({extname: ".hbs"})); // Register Handlebars engine
+app.engine("hbs", engine({
+    extname: ".hbs",
+    helpers: { // needed for comparison in Handlebars templates
+        ifEquals(a, b, options) {
+            return a === b ? options.fn(this) : options.inverse(this);
+        }
+    }
+})); // Register Handlebars engine
 app.set("view engine", "hbs"); // Set view engine to Handlebars
 app.set("views", path.join(__dirname, "views")); // Set views directory
 
