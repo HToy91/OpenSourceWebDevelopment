@@ -16,7 +16,7 @@ router.post("/employees", async (req, res) => {
             department: req.body.department,
             startDate: req.body.startDate ? new Date(req.body.startDate) : undefined,
             jobTitle: req.body.jobTitle,
-            salary: parseFloat(req.body.salary)
+            salary: parseFloat(req.body.salary) // So I can store decimal values
         }
         await Employee.create(payload); // Create new employee in DB
         res.redirect("/"); // Redirect to employees list
