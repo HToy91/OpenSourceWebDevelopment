@@ -1,8 +1,5 @@
-/* body{
-    background-color: lightblue;
-} */
-.bg {
-    background-color: lightgreen;
+body{
+    background-color: darkgray;
 }
 
 .container {
@@ -38,6 +35,42 @@ th, td {
     text-align: left;
 }
 
+tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
 .error {
     color: #b00020
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.create-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.create-btn:hover {
+    background-color: #45a049;
 }
