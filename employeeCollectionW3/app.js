@@ -53,3 +53,8 @@ connectToMongo().then(() => {
         console.log(`Server is running on http://localhost:${port}`);
     });
 });
+
+// Handle 404 errors
+app.use((req, res) => {
+    res.redirect("/");
+});
