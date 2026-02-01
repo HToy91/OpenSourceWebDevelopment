@@ -90,3 +90,16 @@ a:hover {
 .logout-btn:hover {
     background-color: #333333;
 }
+
+.login-register-btn {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.login-register-btn:hover {
+    background-color: #007bb5;
+}
