@@ -11,6 +11,12 @@ const MONGO_URI = process.env.MONGO_URI; // Get MongoDB URI from environment var
 const employeesRouter = require("./routes/employees"); // Import employees router
 const {engine} = require("express-handlebars"); // Import express-handlebars
 
+const session = require("express-session");
+const {MongoStore} = require("connect-mongo");
+const passport = require("passport");
+
+require("./auth/passport"); // Import passport configuration
+
 // Setup templating engine
 app.engine("hbs", engine({
     extname: ".hbs",
@@ -35,7 +41,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // To parse form data
 app.use(methodOverride("_method")); // To support PUT and DELETE methods via query parameter
-app.use("/", employeesRouter); // Use employees router for all Routes
 
 async function connectToMongo() {
     try {
@@ -47,6 +52,35 @@ async function connectToMongo() {
     }
 }
 
+// Setup Password authentication
+app.use(session({
+    secret: process.env.SESSION_SECRET, // Secret for signing session ID cookie
+    resave: false, // Don't save session if unmodified
+    saveUninitialized: false, // don't create a session until something is stored
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI,
+        dbName: "Empl"
+    }),
+    cookie: {httpOnly: true}
+}));
+
+app.use(passport.initialize()); // Initialize Passport
+app.use(passport.session()); // Use Passport session
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
+
+// Routers (must be mounted AFTER passport/session so req.isAuthenticated exists)
+app.use("/", employeesRouter); // Use employees router for all Routes
+
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
+
+app.use((req, res) => {
+    res.status(404).redirect("/auth/login")
+});
+
 // Start the server after connecting to MongoDB
 connectToMongo().then(() => {
     app.listen(port, () => {
@@ -55,6 +89,6 @@ connectToMongo().then(() => {
 });
 
 // Handle 404 errors
-app.use((req, res) => {
-    res.redirect("/");
-});
+// app.use((req, res) => {
+//     res.redirect("/");
+// });

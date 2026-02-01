@@ -11,6 +11,23 @@
 </head>
 <body>
     <main class="container">
+        <header style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1em;">
+            <div><a href="/">Employees</a></div>
+
+            <div>
+                {{#if user}}
+                    <span>Welcome {{user.username}}</span>
+
+                    <form action="/auth/logout" method="POST">
+                        <button type="submit">Logout</button>
+                    </form>
+
+                {{else}}
+                    <a href="/auth/login">Login | </a>
+                    <a href="/auth/register">Register</a>
+                {{/if}}
+            </div>
+        </header>
         {{{body}}} {{!-- Handlebars placeholder for dynamic content --}}
     </main>
 </body>

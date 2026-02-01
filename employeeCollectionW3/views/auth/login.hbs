@@ -1,24 +1,20 @@
-<h1>Register</h1>
+<h1>Login</h1>
 
 {{#if error}}
     <p class="error">{{error}}</p>
 {{/if}}
 
-<form action="/auth/register" method="POST">
+<form action="/auth/login" method="POST">
     <label>
         Username
         <input type="text" name="username" required>
-    </label>
-    <label>
-        Email
-        <input type="email" name="email" required>
     </label>
     <label>
         Password
         <input type="password" name="password" required>
     </label>
 
-    <button type="submit">Register</button>
+    <button type="submit">Login</button>
 </form>
 
-<p><a href="/auth/login">Back to Login</a></p>
+<p><a href="/auth/register">Create an Account</a></p>

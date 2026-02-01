@@ -33,7 +33,7 @@ passport.serializeUser((user, done) => {
 // Deserialize user from session. Deserialize means fetching user details using the ID stored in session
 passport.deserializeUser(async (id, done) => {
     try {
-        const user = await user.findById(id).lean();
+        const user = await User.findById(id).lean();
         done(null, user); // Attach user object to req.user
     } catch (err) {
         done(err);

@@ -2,13 +2,16 @@ const express = require('express');
 const router = express.Router();
 const Employee = require('../models/Employee');
 
+const {model} = require("mongoose");
+const requireAuth = require("../middleware/requireAuth");
+
 router.get("/", async (req, res) => {
     const employees = await Employee.find().sort({createdAt: -1}).lean(); // Fetch all employees from DB
     res.render("employees/index", {employees}); // Render employees index view with data
 });
 
 // Create route - Add a new employee
-router.post("/employees", async (req, res) => {
+router.post("/employees", requireAuth, async (req, res) => {
     try {
         const payload = {
             firstName: req.body.firstName,
@@ -31,7 +34,7 @@ router.post("/employees", async (req, res) => {
 });
 
 // Update route - Update an existing employee
-router.put("/employees/:id", async (req, res) => {
+router.put("/employees/:id", requireAuth, async (req, res) => {
     try {
         const payload = {
             ...req.body, // Spread operator to copy all fields. it will overwrite only the fields present in req.body
@@ -50,7 +53,7 @@ router.put("/employees/:id", async (req, res) => {
 });
 
 // Edit Page
-router.get("/employees/:id/edit", async (req, res) => {
+router.get("/employees/:id/edit", requireAuth, async (req, res) => {
     const employee = await Employee.findById(req.params.id).lean()
 
     if (!employee) {
@@ -60,7 +63,7 @@ router.get("/employees/:id/edit", async (req, res) => {
 });
 
 // Delete route - Delete an employee
-router.delete("/employees/:id", async (req, res) => {
+router.delete("/employees/:id", requireAuth, async (req, res) => {
     await Employee.findByIdAndDelete(req.params.id);
     res.redirect("/"); // Redirect to employees list
 });
