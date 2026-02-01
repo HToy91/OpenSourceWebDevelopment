@@ -60,9 +60,9 @@
                     <th>Department</th>
                     <th>Start Date</th>
                     <th>Job Title</th>
-                    <th>Salary</th>
 
                     {{#if user}}
+                    <th>Salary</th>
                     <th>Actions</th>
                     {{/if}}
                 </tr>
@@ -76,9 +76,9 @@
                         <td>{{this.department}}</td>
                         <td>{{this.startDate}}</td>
                         <td>{{this.jobTitle}}</td>
-                        <td>${{this.salary}}</td>
 
                         {{#if ../user}}
+                        <td>${{this.salary}}</td>
                         <td>
                             <a href="/employees/{{this._id}}/edit">Edit</a>
                             <form action="/employees/{{this._id}}?_method=DELETE" method="POST">

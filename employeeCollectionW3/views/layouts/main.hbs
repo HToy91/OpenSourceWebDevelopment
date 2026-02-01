@@ -16,7 +16,7 @@
 
             <div>
                 {{#if user}}
-                    <span>Welcome {{user.username}}</span>
+                    <span>Welcome <span style="font-weight: bold; font-size: xx-large">{{user.username}}</span></span>
 
                     <form action="/auth/logout" method="POST">
                         <button type="submit" class="logout-btn">Logout</button>

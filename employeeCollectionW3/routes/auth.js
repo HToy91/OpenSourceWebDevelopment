@@ -37,11 +37,38 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// Login via credentials
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/auth/login"
-}));
+// function to validate login input
+function validateLogin(req, res, next) {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).render("auth/login", {
+            error: "Username and password are required.",
+            username,
+        });
+    }
+
+    next();
+}
+
+router.post("/login", validateLogin, (req, res, next) => {
+    passport.authenticate("local", (err, user) => {
+        if (err) return next(err);
+
+        if (!user) {
+            return res.status(401).render("auth/login", {
+                error: "Invalid username or password.",
+                username: req.body.username,
+            });
+        }
+
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            return res.redirect("/");
+        });
+    })(req, res, next);
+});
+
 
 // Logout route
 router.post("/logout", (req, res, next) => {
