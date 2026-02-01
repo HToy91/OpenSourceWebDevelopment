@@ -51,6 +51,7 @@ function validateLogin(req, res, next) {
     next();
 }
 
+// Post route to handle user login
 router.post("/login", validateLogin, (req, res, next) => {
     passport.authenticate("local", (err, user) => {
         if (err) return next(err);
