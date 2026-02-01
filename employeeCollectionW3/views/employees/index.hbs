@@ -1,4 +1,8 @@
+{{#if user}}
 <h1>Managers Portal</h1>
+{{else}}
+<h1>Employee Directory</h1>
+{{/if}}
 
 {{#if error}}
     <p class="error">{{error}}</p>
