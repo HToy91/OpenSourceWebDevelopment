@@ -5,3 +5,6 @@ npm install dotenv --save
 npm install mongoose --save
 npm install method-override --save
 npm install express-handlebars --save
+
+//Week 4
+// npm install passport passport-local express-session connect-mongo bcrypt --save
