@@ -66,6 +66,8 @@ app.use(session({
 
 app.use(passport.initialize()); // Initialize Passport
 app.use(passport.session()); // Use Passport session
+
+// Middleware to make user object available in all views
 app.use((req, res, next) => {
     res.locals.user = req.user;
     next();
