@@ -23,6 +23,15 @@ app.engine("hbs", engine({
     helpers: { // needed for comparison in Handlebars templates. helpers are like functions that can be called from templates
         ifEquals(a, b, options) {
             return a === b ? options.fn(this) : options.inverse(this); // Return true block if equal, else false block
+        },
+        formatDate(dateString) {
+            // const date = new Date(dateString);
+            // const year = date.getFullYear();
+            // const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+            // const day = date.getDate().toString().padStart(2, '0');
+            // return `${year}-${month}-${day}`;
+
+            return new Date(dateString).toISOString().split("T")[0];
         }
     }
 })); // Register Handlebars engine
