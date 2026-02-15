@@ -9,6 +9,8 @@
 <body>
     <h2>Socket.io Chat</h2>
 
+    <h3>Start with "@bot" to talk to chatbot</h3>
+
     <div id="chat-box"></div>
     <input type="text" id="message-input" placeholder="Type your message here...">
     <button onclick="sendMessage()">Send Message</button>
@@ -20,6 +22,8 @@
     </div>
 
     <script>
+
+
         const username = prompt("Enter your username:");
         const socket = io();
         socket.emit("set username", username);

@@ -1,2 +1,3 @@
 npm init
 npm install express http socket.io ws --save
+https://developers.openai.com/api/docs/quickstart
