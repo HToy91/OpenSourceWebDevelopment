@@ -3,7 +3,12 @@ const express = require("express"); // Import the Express framework to create a 
 const app = express(); // Create an instance of the Express application
 const http = require("http"); // Import the built-in 'http' module to create an HTTP server
 const {Server} = require("socket.io");
+
 const OpenAI = require("openai"); // Import the 'Server' class from the 'socket.io' module to create a Socket.IO server
+require("dotenv").config();
+const client = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 const server = http.createServer(app); // This line is duplicated and should be removed. It creates another HTTP server, which is unnecessary.
 const io = new Server(server); // Create a Socket.IO server and attach it to the HTTP server
@@ -22,16 +27,16 @@ io.on("connection", (socket) => {
         console.log(`Message received: ${msg}`); // Log the received message
         io.emit("chat message", `${socket.username}: ${msg}`); // Broadcast the message to all connected clients
 
-        // if (msg.split(" ")[0] === "@bot") {
-        //     const userMessage = msg.split(" ")[1]
-        //
-        //     const response = await client.responses.create({
-        //         model: "gpt-5.2",
-        //         input: `${userMessage}`
-        //     });
-        //
-        //     io.emit("chat message", `Chatbot: ${response.output_text}`); // Broadcast the chatbot's response to all connected clients
-        // }
+        if (msg.split(" ")[0] === "@bot") {
+            const userMessage = msg.replace("@bot", "").trim(); // Remove the "@bot" prefix and trim any extra whitespace
+
+            const response = await client.responses.create({
+                model: "gpt-5.2",
+                input: `${userMessage}`
+            });
+
+            io.emit("chat message", `Chatbot: ${socket.username} ${response.output_text}`); // Broadcast the chatbot's response to all connected clients
+        }
     });
 
     // Event for setting username
