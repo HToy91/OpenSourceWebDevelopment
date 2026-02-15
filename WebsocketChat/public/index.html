@@ -43,11 +43,11 @@
           const chatBox = document.getElementById("chat-box");
           const messageElement = document.createElement("p")
 
-          messageElement.textContent = `${msg.sender}: ${msg.text}`;
-
-          if (msg.sender === "chatbot") {
+          if (msg.sender === "Chatbot") {
               messageElement.classList.add("chatbot-message");
           }
+          messageElement.textContent = `${msg.sender}: ${msg.text}`;
+
           chatBox.appendChild(messageElement);
           chatBox.scrollTop = chatBox.scrollHeight;
         });
