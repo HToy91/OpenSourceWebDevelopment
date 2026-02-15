@@ -25,7 +25,11 @@ io.on("connection", (socket) => {
     socket.on("chat message", async (msg) => {
 
         console.log(`Message received: ${msg}`); // Log the received message
-        io.emit("chat message", `${socket.username}: ${msg}`); // Broadcast the message to all connected clients
+        io.emit("chat message", {
+            sender: socket.username,
+            type: "user",
+            text: msg
+        });
 
         if (msg.split(" ")[0] === "@bot") {
             const userMessage = msg.replace("@bot", "").trim(); // Remove the "@bot" prefix and trim any extra whitespace
@@ -35,7 +39,11 @@ io.on("connection", (socket) => {
                 input: `${userMessage}`
             });
 
-            io.emit("chat message", `Chatbot: ${socket.username} ${response.output_text}`); // Broadcast the chatbot's response to all connected clients
+            io.emit("chat message", {
+                sender: "Chatbot",
+                type: "chatbot",
+                text: `${socket.username}, ${response.output_text}`
+            });
         }
     });
 
