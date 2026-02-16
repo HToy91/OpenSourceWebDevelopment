@@ -104,6 +104,7 @@ button:hover {
 .message-sender {
     font-weight: bold;
     color: #4CAF50;
+    text-decoration: underline;
 }
 
 .chatbot-message .message-sender {
@@ -115,4 +116,12 @@ button:hover {
     color: black;
     padding: 5px;
     border-radius: 5px;
+}
+
+#header {
+    grid-area: header;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
 }

@@ -34,6 +34,12 @@ io.on("connection", (socket) => {
         if (msg.split(" ")[0].toLowerCase() === "@jarvis") {
             const userMessage = msg.replace("@jarvis", "").trim(); // Remove the "@bot" prefix and trim any extra whitespace
 
+            io.emit("chat message", {
+                sender: "Jarvis",
+                type: "processing",
+                text: "Processing your request..."
+            })
+
             const response = await client.responses.create({
                 model: "gpt-5.2",
                 input: `${userMessage}`
