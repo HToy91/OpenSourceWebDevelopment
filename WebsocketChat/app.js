@@ -53,6 +53,7 @@ io.on("connection", (socket) => {
         }
     });
 
+
     // Event for setting username
     socket.on("set username", (username) => {
         socket.username = username;
