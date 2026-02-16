@@ -66,11 +66,7 @@ io.on("connection", (socket) => {
         console.log(`${socket.username} disconnected`); // Log when a user disconnects
         users.delete(socket.username);
         if (socket.username) {
-            io.emit("chat message", {
-                sender: "System",
-                type: "chatbot",
-                text: `${socket.username} has left the chat.`
-        }); // Broadcast a message that the user has left
+            io.emit("chat message", `${socket.username} has left the chat`); // Broadcast a message that the user has left
 
         }
 
