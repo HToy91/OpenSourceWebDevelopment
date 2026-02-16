@@ -100,3 +100,19 @@ button {
 button:hover {
     background-color: darkgreen;
 }
+
+.message-sender {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.chatbot-message .message-sender {
+    color: #2196F3;
+}
+
+.chatbot-message {
+    background-color: #f0f8ff;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+}

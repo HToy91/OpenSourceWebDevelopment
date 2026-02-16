@@ -31,7 +31,7 @@
             </div>
 
             <div class="input-row">
-                <input type="text" id="message-input" placeholder="Start with '@bot' to chat with the chatbot...">
+                <input type="text" id="message-input" placeholder="Start with '@Jarvis' to chat him...">
                 <button onclick="sendMessage()">Send Message</button>
 
             </div>
@@ -60,18 +60,36 @@
         }
 
         socket.on("chat message", (msg) => {
-          const chatBox = document.getElementById("chat-box");
-          const chatArea = document.getElementById("chat-area");
-          const messageElement = document.createElement("p")
 
-          if (msg.sender === "jarvis") {
-              messageElement.classList.add("chatbot-message");
-          }
-          messageElement.textContent = `${msg.sender}: ${msg.text}`;
+            const chatBox = document.getElementById("chat-box");
+            const chatArea = document.getElementById("chat-area");
 
-          chatBox.appendChild(messageElement);
-          chatBox.scrollTop = chatBox.scrollHeight;
-          chatArea.scrollTop = chatArea.scrollHeight;
+            const messageElement = document.createElement("p");
+
+            // Create username element
+            const senderElement = document.createElement("span");
+
+            senderElement.classList.add("message-sender");
+
+            const sender = msg.sender === username ? "You" : msg.sender;
+            senderElement.textContent = sender + ": ";
+
+            // Create message text element
+            const textElement = document.createElement("span");
+            textElement.textContent = msg.text;
+
+            // Special styling for Jarvis
+            if (msg.sender.toLowerCase() === "jarvis") {
+                messageElement.classList.add("chatbot-message");
+            }
+
+            // Add both to message
+            messageElement.appendChild(senderElement);
+            messageElement.appendChild(textElement);
+
+            chatBox.appendChild(messageElement);
+
+            chatArea.scrollTop = chatArea.scrollHeight;
         });
 
         socket.on("user list", (userlist) => {
