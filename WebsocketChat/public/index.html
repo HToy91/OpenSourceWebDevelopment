@@ -77,7 +77,7 @@
 
             senderElement.classList.add("message-sender");
 
-            const sender = msg.sender === username ? "You" : msg.sender;
+            const sender = msg.sender === username ? "You" : msg.sender; // Display "You" instead of username for own messages
             senderElement.textContent = sender + ": ";
 
             // Create message text element
@@ -85,8 +85,8 @@
             textElement.textContent = msg.text;
 
             // Special styling for Jarvis
-            if (msg.sender.toLowerCase() === "jarvis") {
-                messageElement.classList.add("chatbot-message");
+            if (msg.sender.toLowerCase() === "jarvis") { // Case-insensitive check for "Jarvis"
+                messageElement.classList.add("chatbot-message"); // Add special class for Jarvis messages for styling
             }
 
             // Add both to message
@@ -112,7 +112,7 @@
         });
 
         const input = document.getElementById('message-input');
-        input.addEventListener('keypress', (e) => {
+        input.addEventListener('keypress', (e) => { // Listen for Enter key press when typing message
             if (e.key === 'Enter') {
                 sendMessage();
             }

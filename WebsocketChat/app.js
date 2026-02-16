@@ -6,7 +6,7 @@ const {Server} = require("socket.io");
 
 const OpenAI = require("openai"); // Import the 'Server' class from the 'socket.io' module to create a Socket.IO server
 require("dotenv").config();
-const client = new OpenAI({
+const client = new OpenAI({ // Create a new instance of the OpenAI client and configure it with the API key from environment variables
     apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -25,7 +25,7 @@ io.on("connection", (socket) => {
     socket.on("chat message", async (msg) => {
 
         console.log(`Message received: ${msg}`); // Log the received message
-        io.emit("chat message", {
+        io.emit("chat message", { // Broadcast the message to all connected clients
             sender: socket.username,
             type: "user",
             text: msg
@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
         if (msg.split(" ")[0].toLowerCase() === "@jarvis") {
             const userMessage = msg.replace("@jarvis", "").trim(); // Remove the "@bot" prefix and trim any extra whitespace
 
-            io.emit("chat message", {
+            io.emit("chat message", { // Broadcast a processing message to all clients while waiting for the response from the OpenAI API
                 sender: "Jarvis",
                 type: "processing",
                 text: `${socket.username}, Processing your request...`
@@ -42,13 +42,13 @@ io.on("connection", (socket) => {
 
             const response = await client.responses.create({
                 model: "gpt-5.2",
-                input: `${userMessage}`
+                input: `${userMessage}` // Send the user's message as input to the OpenAI API
             });
 
             io.emit("chat message", {
                 sender: "Jarvis",
                 type: "chatbot",
-                text: `${socket.username}, ${response.output_text}`
+                text: `${socket.username}, ${response.output_text}` // Broadcast the response from the OpenAI API to all clients, addressing the user by their username
             });
         }
     });
@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
 
         }
 
-        io.emit("user list", Array.from(users));
+        io.emit("user list", Array.from(users)); // Broadcast the updated user list to all clients after a user disconnects
     });
 });
 
