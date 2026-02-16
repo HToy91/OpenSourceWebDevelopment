@@ -1,3 +1,7 @@
 npm init
 npm install express http socket.io ws --save
 https://developers.openai.com/api/docs/quickstart
+
+https://opensourcewebdevelopment-1.onrender.com
+
+I implemented the chatbot by using the OpenAI API to generate responses based on user input. The chatbot is built using Node.js and Express for the server, and Socket.io for real-time communication between the client and server. The client-side code uses HTML, CSS, and JavaScript to create a user interface for the chatbot. When creating the response from the OpenAI API, I put the $usermessage for the input in the response. I then put the response in an io.emit to send it back to the client. You are able to talk to the chatbot by starting your message with @jarvis. Features I added are: the chatbot messages are in a different format than the user message, a processing message gets displayed before the chatbot response, the user is reffered to as "You" in the chatbot response, and the chatbot is referred to as "Jarvis" in the chatbot response. Other users are referred to by their username. I also added basic styling to the interface and an event listener for the enter key to send messages. The chatbot is hosted on Render, and you can access it at the provided URL.
