@@ -125,3 +125,56 @@ button:hover {
     font-size: 24px;
     font-weight: bold;
 }
+
+/* =========================
+   MOBILE STYLES
+   ========================= */
+@media (max-width: 768px) {
+
+    .container {
+        padding: 10px;
+        height: auto;
+    }
+
+    .interface {
+        flex-direction: column;   /* stack vertically */
+        width: 100%;              /* full width */
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .user-list {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .chat-interface {
+        width: 100%;
+    }
+
+    #chat-area {
+        height: 50vh;             /* responsive height */
+        margin: 10px 0;
+    }
+
+    .input-row {
+        width: 100%;
+    }
+
+    #message-input {
+        font-size: 16px;          /* prevents zoom on iPhone */
+        padding: 12px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    #header {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+}
