@@ -31,8 +31,8 @@ io.on("connection", (socket) => {
             text: msg
         });
 
-        if (msg.split(" ")[0] === "@bot") {
-            const userMessage = msg.replace("@bot", "").trim(); // Remove the "@bot" prefix and trim any extra whitespace
+        if (msg.split(" ")[0].toLowerCase() === "@jarvis") {
+            const userMessage = msg.replace("@jarvis", "").trim(); // Remove the "@bot" prefix and trim any extra whitespace
 
             const response = await client.responses.create({
                 model: "gpt-5.2",
@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
             });
 
             io.emit("chat message", {
-                sender: "Chatbot",
+                sender: "Jarvis",
                 type: "chatbot",
                 text: `${socket.username}, ${response.output_text}`
             });

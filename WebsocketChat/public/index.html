@@ -9,19 +9,39 @@
     <link rel="stylesheet" href="/css/stylesheet.css">
 </head>
 <body>
-    <h2>Socket.io Chat</h2>
 
-    <h3>Start with "@bot" to talk to chatbot</h3>
+<header></header>
+<div class="container">
 
-    <div id="chat-box"></div>
-    <input type="text" id="message-input" placeholder="Type your message here...">
-    <button onclick="sendMessage()">Send Message</button>
+    <h1>Socket.io Chat</h1>
+
+<!--    <h3>Start with "@bot" to talk to chatbot</h3>-->
+    <div class="interface">
+
+            <div class="user-list">
+                <h3>Active Users</h3>
+                <ul id="user-list"></ul>
+            </div>
+        <div class="chat-interface">
 
 
-    <div>
-        <h3>Active Users</h3>
-        <ul id="user-list"></ul>
+            <div id="chat-area">
+                <div id="chat-box"></div>
+
+            </div>
+
+            <div class="input-row">
+                <input type="text" id="message-input" placeholder="Start with '@bot' to chat with the chatbot...">
+                <button onclick="sendMessage()">Send Message</button>
+
+            </div>
+        </div>
     </div>
+
+
+
+
+</div>
 
     <script>
 
@@ -41,15 +61,17 @@
 
         socket.on("chat message", (msg) => {
           const chatBox = document.getElementById("chat-box");
+          const chatArea = document.getElementById("chat-area");
           const messageElement = document.createElement("p")
 
-          if (msg.sender === "Chatbot") {
+          if (msg.sender === "jarvis") {
               messageElement.classList.add("chatbot-message");
           }
           messageElement.textContent = `${msg.sender}: ${msg.text}`;
 
           chatBox.appendChild(messageElement);
           chatBox.scrollTop = chatBox.scrollHeight;
+          chatArea.scrollTop = chatArea.scrollHeight;
         });
 
         socket.on("user list", (userlist) => {
@@ -63,6 +85,13 @@
                 li.innerHTML = user;
                 userListElement.appendChild(li);
             });
+        });
+
+        const input = document.getElementById('message-input');
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         });
     </script>
 </body>
