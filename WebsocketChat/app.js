@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
             io.emit("chat message", {
                 sender: "Jarvis",
                 type: "processing",
-                text: "Processing your request..."
+                text: `${socket.username}, Processing your request...`
             })
 
             const response = await client.responses.create({
