@@ -30,8 +30,11 @@
                 }
             }`;
 
+            // Send the GraphQL query to the server
             const req = await graphqlRequest(query);
+            // Extract the users from the response
             const users = (req.data && req.data.users) || [];
+            // Display the users in the page
             document.getElementById("users").innerHTML = users.length?
                 `<ul>${users.map(user => `<li>${user.id}: ${user.name} (${user.email}, ${user.age})</li>`).join("")}</ul>`: "<em>no users found</em>";
         }
