@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+// Middleware to parse JSON and URL-encoded request bodies
+app.use(express.static("public"));
+// app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Setup GraphQL schema
 const schema = buildSchema(`
     type User {
@@ -36,18 +41,25 @@ const schema = buildSchema(`
     
     type Mutation {
         addUser(name: String!, email: String!, age: Int): User
-        updateUser(name: String!, email: String!, age: Int): User
-        deleteUser(id:ID!): String
+        updateUser(id: ID!, name: String!, email: String!, age: Int): User
+        deleteUser(id: ID!): String
     }
 `);
 
 // Define root resolvers for GraphQL queries and mutations
 const root = {
     users: async () => await User.find(),
-    user: async () => await User.findById(id),
+    user: async ({id}) => await User.findById(id),
     addUser: async ({name, email, age}) => {
         const newUser = new User({name, email, age});
         return await newUser.save();
+    },
+    updateUser: async ({id, name, email, age}) => {
+        return User.findByIdAndUpdate(id, {name, email, age}, {new: true});
+    },
+    deleteUSer: async (id) => {
+        await User.findByIdAndDelete(id);
+        return `User with id ${id} deleted successfully.`;
     }
 };
 

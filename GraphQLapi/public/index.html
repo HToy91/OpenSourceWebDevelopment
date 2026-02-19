@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GraphQL Client</title>
+</head>
+<body>
+    <h2>Users</h2>
+
+    <div id="users">Loading...</div>
+
+    <script>
+        const endPoint = "/graphql";
+
+        async function graphqlRequest(query, variables = {}) {
+            const res = await fetch(endPoint, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({query, variables})
+            });
+            return res.json();
+        }
+
+        async function loadUsers() {
+            const query = `query {
+                users {
+                    id
+                    name
+                    email
+                }
+            }`;
+
+            const req = await graphqlRequest(query);
+            const users = (req.data && req.data.users) || [];
+            document.getElementById("users").innerHTML = users.length?
+                `<ul>${users.map(user => `<li>${user.id}: ${user.name} (${user.email}, ${user.age})</li>`).join("")}</ul>`: "<em>no users found</em>";
+        }
+
+        loadUsers();
+    </script>
+</body>
+</html>
