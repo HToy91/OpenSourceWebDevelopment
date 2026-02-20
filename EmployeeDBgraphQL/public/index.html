@@ -210,40 +210,47 @@
                 // Prevent the form from submitting normally
                 e.preventDefault();
 
-                const mutation = `mutation {
-                  updateEmployee(
-                        id: "${id}",
-                        firstName: "${document.getElementById("firstName").value}",
-                        lastName: "${document.getElementById("lastName").value}",
-                        department: "${document.getElementById("department").value}",
-                        startDate: "${document.getElementById("startDate").value}",
-                        jobTitle: "${document.getElementById("jobTitle").value}",
-                        salary: ${parseFloat(document.getElementById("salary").value)}
-                  ) {
-                    id
-                    firstName
-                    lastName
-                    department
-                    startDate
-                    jobTitle
-                    salary
-                  }
+                const mutation = `mutation ($id: ID!, $firstName: String!, $lastName: String!, $department: String!, $startDate: String!, $jobTitle: String!, $salary: Float!) {
+                    updateEmployee(
+                        id: $id,
+                        firstName: $firstName,
+                        lastName: $lastName,
+                        department: $department,
+                        startDate: $startDate,
+                        jobTitle: $jobTitle,
+                        salary: $salary
+                    ) {
+                        id
+                        firstName
+                        lastName
+                        department
+                        startDate
+                        jobTitle
+                        salary
+                      }
                 }`;
 
+                const variables = {
+                    id,
+                    firstName: document.getElementById("firstName").value,
+                    lastName: document.getElementById("lastName").value,
+                    department: document.getElementById("department").value,
+                    startDate: document.getElementById("startDate").value,
+                    jobTitle: document.getElementById("jobTitle").value,
+                    salary: parseFloat(document.getElementById("salary").value)
+                };
 
-
-                const res = await graphqlRequest(mutation);
+                const res = await graphqlRequest(mutation, variables);
 
                 if (res.data && res.data.updateEmployee) {
                     alert("Employee updated!");
-
-                    // Reset form and button
                     saveButton.textContent = "Add Employee";
-                    saveButton.onclick = addEmployee;
+                    saveButton.onclick = addEmployee; // restore behavior
                     document.getElementById("add-employee-form").reset();
                     await loadEmployees();
                 } else {
                     alert("Failed to update employee");
+                    console.log(res);
                 }
             };
         }
