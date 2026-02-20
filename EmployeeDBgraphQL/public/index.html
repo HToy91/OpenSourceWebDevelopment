@@ -138,18 +138,20 @@
         }
 
         async function addEmployee(e) {
-            e.preventDefault(); // Prevent the form from submitting normally
+            e.preventDefault();
 
             const form = document.getElementById("add-employee-form");
-            const firstName = form.firstName.value;
-            const lastName = form.lastName.value;
-            const department = form.department.value;
-            const startDate = form.startDate.value;
-            const jobTitle = form.jobTitle.value;
-            const salary = parseFloat(form.salary.value);
 
-            const mutation = `mutation {
-                addEmployee(firstName: "${firstName}", lastName: "${lastName}", department: "${department}", startDate: "${startDate}", jobTitle: "${jobTitle}", salary: ${salary}) {
+            // To prevent injection, I used parameterized queries with variables instead of string interpolation for the mutation. This way, the user input is treated as data rather than executable code, which helps prevent injection attacks. (thanks software security)
+            const mutation = `mutation ($firstName: String!, $lastName: String!, $department: String!, $startDate: String!, $jobTitle: String!, $salary: Float!) {
+                addEmployee(
+                    firstName: $firstName,
+                    lastName: $lastName,
+                    department: $department,
+                    startDate: $startDate,
+                    jobTitle: $jobTitle,
+                    salary: $salary
+                ) {
                     id
                     firstName
                     lastName
@@ -157,13 +159,22 @@
                     startDate
                     jobTitle
                     salary
-                }
+                  }
             }`;
 
-            const req = await graphqlRequest(mutation, form);
+            const variables = {
+                firstName: form.firstName.value.trim(),
+                lastName: form.lastName.value.trim(),
+                department: form.department.value.trim(),
+                startDate: form.startDate.value,          // "YYYY-MM-DD"
+                jobTitle: form.jobTitle.value.trim(),
+                salary: parseFloat(form.salary.value)
+            };
+
+            const req = await graphqlRequest(mutation, variables);
+
             if (req.data && req.data.addEmployee) {
                 alert(`Employee ${req.data.addEmployee.firstName} ${req.data.addEmployee.lastName} added successfully!`);
-
                 form.reset();
                 await loadEmployees();
             } else {
@@ -172,7 +183,6 @@
         }
 
         async function updateEmployee(id) {
-            // Get employees (you could also query one employee by id if your API supports it)
             const query = `query {
                 employees {
                   id
@@ -245,12 +255,11 @@
                 if (res.data && res.data.updateEmployee) {
                     alert("Employee updated!");
                     saveButton.textContent = "Add Employee";
-                    saveButton.onclick = addEmployee; // restore behavior
+                    saveButton.onclick = addEmployee;
                     document.getElementById("add-employee-form").reset();
                     await loadEmployees();
                 } else {
                     alert("Failed to update employee");
-                    console.log(res);
                 }
             };
         }
