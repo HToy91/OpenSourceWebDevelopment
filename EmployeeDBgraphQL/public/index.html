@@ -111,7 +111,11 @@
                         <td>${formatDate(emp.startDate)}</td>
                         <td>${emp.jobTitle}</td>
                         <td>$ ${emp.salary.toFixed(2)}</td>
-                        <td><button onclick="deleteEmployee('${emp.id}')">Delete</button></td>
+                        <td>
+                        <button onclick="updateEmployee('${emp.id}')">Edit</button>
+
+                        <button onclick="deleteEmployee('${emp.id}')">Delete</button>
+                        </td>
                     </tr>`).join("")}`: "<em>No employees found</em>";
         }
 
@@ -133,8 +137,8 @@
             return new Date(dateString).toISOString().split("T")[0];
         }
 
-        async function addEmployee() {
-            event.preventDefault(); // Prevent the form from submitting normally
+        async function addEmployee(e) {
+            e.preventDefault(); // Prevent the form from submitting normally
 
             const form = document.getElementById("add-employee-form");
             const firstName = form.firstName.value;
@@ -165,6 +169,83 @@
             } else {
                 alert("Failed to add employee");
             }
+        }
+
+        async function updateEmployee(id) {
+            // Get employees (you could also query one employee by id if your API supports it)
+            const query = `query {
+                employees {
+                  id
+                  firstName
+                  lastName
+                  department
+                  startDate
+                  jobTitle
+                  salary
+                }
+              }`;
+
+            const req = await graphqlRequest(query);
+            const employees = (req.data && req.data.employees) || [];
+            // Find the employee to edit
+            const emp = employees.find(e => e.id === id);
+
+            if (!emp) {
+                alert("Employee not found");
+                return;
+            }
+
+            // Fill form
+            document.getElementById("firstName").value = emp.firstName;
+            document.getElementById("lastName").value = emp.lastName;
+            document.getElementById("department").value = emp.department;
+            document.getElementById("startDate").value = formatDate(emp.startDate);
+            document.getElementById("jobTitle").value = emp.jobTitle;
+            document.getElementById("salary").value = emp.salary.toFixed(2);
+
+            const saveButton = document.querySelector(".form-button");
+            saveButton.textContent = "Save Changes";
+
+            saveButton.onclick = async function (e) {
+                // Prevent the form from submitting normally
+                e.preventDefault();
+
+                const mutation = `mutation {
+                  updateEmployee(
+                        id: "${id}",
+                        firstName: "${document.getElementById("firstName").value}",
+                        lastName: "${document.getElementById("lastName").value}",
+                        department: "${document.getElementById("department").value}",
+                        startDate: "${document.getElementById("startDate").value}",
+                        jobTitle: "${document.getElementById("jobTitle").value}",
+                        salary: ${parseFloat(document.getElementById("salary").value)}
+                  ) {
+                    id
+                    firstName
+                    lastName
+                    department
+                    startDate
+                    jobTitle
+                    salary
+                  }
+                }`;
+
+
+
+                const res = await graphqlRequest(mutation);
+
+                if (res.data && res.data.updateEmployee) {
+                    alert("Employee updated!");
+
+                    // Reset form and button
+                    saveButton.textContent = "Add Employee";
+                    saveButton.onclick = addEmployee;
+                    document.getElementById("add-employee-form").reset();
+                    await loadEmployees();
+                } else {
+                    alert("Failed to update employee");
+                }
+            };
         }
 
         loadEmployees();
