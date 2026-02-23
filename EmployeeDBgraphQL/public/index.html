@@ -42,7 +42,7 @@
                     <input type="number" id="salary" name="salary" step="0.01" required>
                 </div>
 
-                <button type="submit" class="form-button" onclick="addEmployee()">Add Employee</button>
+                <button type="submit" class="form-button">Add Employee</button>
 
             </form>
         </section>
@@ -83,6 +83,9 @@
              });
              return res.json();
         }
+
+        document.getElementById("add-employee-form")
+            .addEventListener("submit", addEmployee);
 
         async function loadEmployees() {
             const query = `query {
