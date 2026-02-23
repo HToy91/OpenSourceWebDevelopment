@@ -40,3 +40,8 @@ th, td {
 tbody tr:hover {
     background-color: #f2f2f2;
 }
+
+#employee-deleted {
+    color: #b00020;
+    margin-top: 10px;
+}

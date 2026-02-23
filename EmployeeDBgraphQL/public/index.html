@@ -68,6 +68,8 @@
             <tbody id="employees"></tbody>
         </table>
 
+        <h2 id="employee-deleted"></h2>
+
     </section>
 
     <script>
@@ -129,7 +131,9 @@
 
             const req = await graphqlRequest(mutation, {id});
                 if (req.data && req.data.deleteEmployee) {
-                    alert(req.data.deleteEmployee);
+                    var emp_deleted = document.getElementById("employee-deleted")
+                    emp_deleted.textContent = `${req.data.deleteEmployee}!`;
+                    // alert(req.data.deleteEmployee);
                     await loadEmployees();
                 } else {
                     alert("Failed to delete employee");
@@ -183,6 +187,9 @@
             } else {
                 alert("Failed to add employee");
             }
+
+            var emp_deleted = document.getElementById("employee-deleted");
+            emp_deleted.textContent = "";
         }
 
         async function updateEmployee(id) {
