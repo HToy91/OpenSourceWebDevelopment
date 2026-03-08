@@ -13,7 +13,7 @@
     <h1>Employee Management</h1>
     
     <section class="card">
-        <h2>Add Employee</h2>
+        <h2 id="formTitle">Add Employee</h2>
 
         <form action="" id="employeeForm">
             
@@ -43,6 +43,7 @@
             </div>
             
             <button type="submit">Add Employee</button>
+            <button type="button" id="cancelEdit">Cancel</button>
             
         </form><!--/employeeFrom-->
     </section><!--/card-->
@@ -59,8 +60,12 @@
                     <th>Department</th>
                     <th>Salary</th>
                     <th>Hire Date</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
+                
+                <tbody id="employeeTableBody"></tbody>
+                
             </table>
             
         </div><!--/table-container-->

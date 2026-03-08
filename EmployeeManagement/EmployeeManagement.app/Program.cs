@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen();
 
 // MongoDB connection
 builder.Services.Configure<MongoDbSettings>(
+    // Binded from appsettings.json config file.
+    // The connection string is hidden and accessed securely through user secrets in development and environment variables in production, ensuring that sensitive information is not exposed in the source code or configuration files.
     builder.Configuration.GetSection("MongoDbSettings"));
 
 // Register the MongoDB client as a singleton service, ensuring that it is shared across the application and properly disposed of when the application shuts down.
@@ -24,6 +26,7 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
 // Register the EmployeeRepository as a singleton service, allowing it to be injected into controllers or other services that require access to employee data.
 builder.Services.AddSingleton<EmployeeRepository>();
 
+// Configure GraphQL services using HotChocolate. This setup includes adding the GraphQL server, defining the query and mutation types for handling GraphQL operations related to employee management.
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()

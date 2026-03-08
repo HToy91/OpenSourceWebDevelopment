@@ -7,7 +7,7 @@ namespace EmployeeManagement.Library;
 public class Employee
 {
     // Properties
-    // Use MongoDB's BsonId and BsonRepresentation attributes to specify that the Id property is the unique identifier for the document and should be stored as an ObjectId in MongoDB.
+    // Use MongoDB's BsonId and BsonRepresentation attributes to specify that the id property is the unique identifier for the document and should be stored as an ObjectId in MongoDB.
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }

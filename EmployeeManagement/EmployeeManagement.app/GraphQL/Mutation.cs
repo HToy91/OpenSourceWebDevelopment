@@ -3,6 +3,7 @@ using HotChocolate;
 
 namespace EmployeeManagement.GraphQL;
 
+// Mutation class for GraphQL operations related to employee management. Contains methods for adding, updating, and deleting employee records, as well as a seed method for testing purposes.
 public class Mutation
 {
     // Mutation method to add a new employee. Takes employee details as parameters and uses the EmployeeRepository to add the employee to the database. Returns the added employee with its generated Id.
@@ -63,13 +64,29 @@ public class Mutation
             repo
                 .DeleteAsync(id);
     }
-
-    public async Task<Employee?> GetEmployeeById(
-        string id,
-        [Service] EmployeeRepository repo)
+    
+    // Seed mutation for testing.
+    public async Task<int> SeedTestEmployees([Service] EmployeeRepository repo)
     {
-        return await
-            repo
-                .GetByIdAsync(id);
+        var employees = new List<Employee>
+        {
+            new Employee { Id = null, FirstName = "Jose", LastName = "Vargas", Department = "IT", Salary = 65000, HireDate = new DateTime(2024, 1, 15) },
+            new Employee { Id = null, FirstName = "Maria", LastName = "Lopez", Department = "HR", Salary = 58000, HireDate = new DateTime(2023, 6, 10) },
+            new Employee { Id = null, FirstName = "David", LastName = "Chen", Department = "Finance", Salary = 72000, HireDate = new DateTime(2022, 9, 5) },
+            new Employee { Id = null, FirstName = "Sarah", LastName = "Miller", Department = "Marketing", Salary = 61000, HireDate = new DateTime(2021, 3, 20) },
+            new Employee { Id = null, FirstName = "James", LastName = "Brown", Department = "IT", Salary = 85000, HireDate = new DateTime(2020, 11, 1) },
+            new Employee { Id = null, FirstName = "Emily", LastName = "Davis", Department = "Sales", Salary = 54000, HireDate = new DateTime(2024, 2, 12) },
+            new Employee { Id = null, FirstName = "Michael", LastName = "Garcia", Department = "Operations", Salary = 67000, HireDate = new DateTime(2023, 8, 18) },
+            new Employee { Id = null, FirstName = "Ashley", LastName = "Wilson", Department = "Support", Salary = 50000, HireDate = new DateTime(2022, 4, 25) },
+            new Employee { Id = null, FirstName = "Daniel", LastName = "Martinez", Department = "Engineering", Salary = 93000, HireDate = new DateTime(2021, 7, 14) },
+            new Employee { Id = null, FirstName = "Jessica", LastName = "Taylor", Department = "Design", Salary = 76000, HireDate = new DateTime(2020, 5, 30) }
+        };
+
+        foreach (var employee in employees)
+        {
+            await repo.AddAsync(employee);
+        }
+
+        return employees.Count;
     }
 }

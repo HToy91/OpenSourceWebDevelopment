@@ -7,3 +7,5 @@ Used .Net User Secrets
 -dotnet user-secrets set "MongoDbSettings:ConnectionString" "your-mongodb-connection-string" // stored locally to my machine
 
 -dotnet add package HotChocolate.AspNetCore --version 15.1.12
+
+Application uses ASP.NET Core with MongoDB as the database and HotChocolate for GraphQL API. The MongoDB connection string is stored securely using .NET User Secrets, allowing for safe management of sensitive information during development. Frontend is a static HTML, CSS, and JavaScript served from wwwroot folder. GraphQL query and mutation classes call into an EmployeeRepository, which encapsulates MongoDB CRUD operations.

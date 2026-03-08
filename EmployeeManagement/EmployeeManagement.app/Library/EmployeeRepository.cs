@@ -59,7 +59,7 @@ public class EmployeeRepository
                     .ReplaceOneAsync(emp => emp.Id == employee.Id, employee);
         
         // Return true if the update was successful (i.e., at least one document was modified)
-        return result.ModifiedCount > 0;
+        return result.MatchedCount > 0;
     }
     
     // Delete an employee by Id

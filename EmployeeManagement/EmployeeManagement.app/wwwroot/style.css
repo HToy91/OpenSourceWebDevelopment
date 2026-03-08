@@ -11,6 +11,7 @@ body {
 
 h1 {
     margin-bottom: 24px;
+    text-align: center;
 }
 
 .card {
@@ -54,16 +55,74 @@ button:hover {
     max-height: 300px;
     overflow-y: auto;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 8px;
+    background: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 thead th {
     position: sticky;
+    top: 0;
     background: white;
+    z-index: 1;
+    font-weight: 700;
+    border-bottom: 2px solid #ddd;
 }
 
 th, td {
-    border-bottom: 1px solid #ddd;
-    padding: 12px;
+    padding: 14px 16px;
     text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+
+tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Action buttons inside table */
+button.edit-btn,
+button.delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-right: 6px;
+}
+
+/* EDIT button */
+.edit-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2563eb;
+}
+
+/* DELETE button */
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+#cancelEdit {
+    display: none;
+    background: #6b7280;
+}
+
+#cancelEdit:hover {
+    background: #4b5563;
 }
