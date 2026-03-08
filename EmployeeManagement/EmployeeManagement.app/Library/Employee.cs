@@ -10,7 +10,7 @@ public class Employee
     // Use MongoDB's BsonId and BsonRepresentation attributes to specify that the Id property is the unique identifier for the document and should be stored as an ObjectId in MongoDB.
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; } = string.Empty;
+    public string? Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Department { get; set; } = string.Empty;

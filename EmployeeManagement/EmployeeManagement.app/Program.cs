@@ -38,6 +38,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Serve static files and enable default file mapping (e.g., index.html) to allow hosting a frontend application alongside the API. This configuration allows the application to serve static assets such as HTML, CSS, and JavaScript files from the wwwroot folder, enabling a seamless integration of the frontend and backend components of the application.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapGraphQL();
 
 // app.UseHttpsRedirection();

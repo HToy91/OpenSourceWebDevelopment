@@ -75,3 +75,4 @@
 /Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/obj/Debug/net8.0/EmployeeManagement.app.pdb
 /Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/obj/Debug/net8.0/EmployeeManagement.app.genruntimeconfig.cache
 /Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/obj/Debug/net8.0/ref/EmployeeManagement.app.dll
+/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/bin/Debug/net8.0/EmployeeManagement.app.staticwebassets.runtime.json

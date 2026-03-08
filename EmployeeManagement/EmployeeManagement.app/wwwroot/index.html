@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<div class="container">
+    <h1>Employee Management</h1>
+    
+    <section class="card">
+        <h2>Add Employee</h2>
+
+        <form action="" id="employeeForm">
+            
+            <div class="form-row">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+            
+            <div class="form-row">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+            
+            <div class="form-row">
+                <label for="department">Department</label>
+                <input type="text" id="department" required>
+            </div>
+            
+            <div class="form-row">
+                <label for="salary">Salary</label>
+                <input type="number" id="salary" step="0.01" required>
+            </div>
+            
+            <div class="form-row">
+                <label for="hireDate">Hire Date</label>
+                <input type="date" id="hireDate" required>
+            </div>
+            
+            <button type="submit">Add Employee</button>
+            
+        </form><!--/employeeFrom-->
+    </section><!--/card-->
+    
+    <section class="card">
+        <h2>Employees</h2>
+        
+        <div class="table-container">
+            
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Hire Date</th>
+                </tr>
+                </thead>
+            </table>
+            
+        </div><!--/table-container-->
+    </section><!--/card-->
+</div> <!--/container-->
+
+<script src="app.js"></script>
+
+</body>
+</html>

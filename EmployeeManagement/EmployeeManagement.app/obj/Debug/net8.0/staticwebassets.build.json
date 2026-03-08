@@ -1,11 +1,77 @@
 {
   "Version": 1,
-  "Hash": "WI4CMKUdqFgu8/5KFeZ1TcLpCfin3/mUkCsoDqiRMN0=",
+  "Hash": "cN8F5aNx8yBrTXpDyl2oOd0+Q5F+hhK56FUQupYuLl8=",
   "Source": "EmployeeManagement.app",
   "BasePath": "_content/EmployeeManagement.app",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "EmployeeManagement.app/wwwroot",
+      "Source": "EmployeeManagement.app",
+      "ContentRoot": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/",
+      "BasePath": "_content/EmployeeManagement.app",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/app.js",
+      "SourceId": "EmployeeManagement.app",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/",
+      "BasePath": "_content/EmployeeManagement.app",
+      "RelativePath": "app.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/app.js"
+    },
+    {
+      "Identity": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/index.html",
+      "SourceId": "EmployeeManagement.app",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/",
+      "BasePath": "_content/EmployeeManagement.app",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/index.html"
+    },
+    {
+      "Identity": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/style.css",
+      "SourceId": "EmployeeManagement.app",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/josevargasfigueroa/Documents/AdvancedOpenSourceWebDevelopment/OpenSourceWebDevelopment/EmployeeManagement/EmployeeManagement.app/wwwroot/",
+      "BasePath": "_content/EmployeeManagement.app",
+      "RelativePath": "style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/style.css"
+    }
+  ]
 }
