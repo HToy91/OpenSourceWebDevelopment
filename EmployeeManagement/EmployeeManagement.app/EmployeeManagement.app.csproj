@@ -9,14 +9,10 @@
   </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="HotChocolate" Version="16.0.0-p.11.31" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.12" />
+<!--        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />-->
         <PackageReference Include="MongoDB.Driver" Version="3.7.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Interfaces\" />
     </ItemGroup>
 
 </Project>

@@ -43,13 +43,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "HotChocolate": {
+            "HotChocolate.AspNetCore": {
               "target": "Package",
-              "version": "[16.0.0-p.11.31, )"
-            },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[15.1.12, )"
             },
             "MongoDB.Driver": {
               "target": "Package",
