@@ -1,0 +1,7 @@
+Add packages
+-MongoDB.Driver
+-HotChocolate.AspNetCore
+
+Used .Net User Secrets
+-dotnet user-secrets init // creates a secrets store linked to project
+-dotnet user-secrets set "MongoDbSettings:ConnectionString" "your-mongodb-connection-string" // stored locally to my machine
