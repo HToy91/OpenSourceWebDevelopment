@@ -3,7 +3,7 @@
 // Endpoint for GraphQL API
 const endPoint = "/graphql";
 
-// DOM Elements
+// DOM Elements.
 const employeeForm = document.getElementById("employeeForm");
 const employeeTableBody = document.getElementById("employeeTableBody");
 let editingEmployeeId = null;
@@ -55,6 +55,7 @@ async function loadEmployees() {
     renderEmployees(data.employees);
 }
 
+// Render the list of employees in the table
 function renderEmployees(employees) {
     // Clear existing rows
     employeeTableBody.innerHTML = "";
@@ -95,6 +96,7 @@ function renderEmployees(employees) {
     
     deleteBtn.forEach(button => {
         button.addEventListener("click", async (event) => {
+            // Get the employee ID from the button's data attribute
             const id = event.target.dataset.id;
             await deleteEmployee(id);
         });
@@ -143,7 +145,7 @@ async function startEdit(id) {
     document.getElementById("salary").value = employee.salary;
     document.getElementById("hireDate").value = formatDate(employee.hireDate);
     
-    // Change the submit button text to indicate update mode
+    // Change the submit button text and title to indicate update mode
     SubmitButton.textContent = "Update Employee";
     formTitle.innerText = "Edit Employee";
 }

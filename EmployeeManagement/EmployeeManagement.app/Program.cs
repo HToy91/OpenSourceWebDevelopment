@@ -10,13 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// MongoDB connection
+// MongoDB connection. Binds config values so when ASP.NET Core creates an instance of MongoDbSettings at runtime.
 builder.Services.Configure<MongoDbSettings>(
     // Binded from appsettings.json config file.
     // The connection string is hidden and accessed securely through user secrets in development and environment variables in production, ensuring that sensitive information is not exposed in the source code or configuration files.
     builder.Configuration.GetSection("MongoDbSettings"));
 
-// Register the MongoDB client as a singleton service, ensuring that it is shared across the application and properly disposed of when the application shuts down.
+// Register the MongoDB client as a singleton service, ensuring that it is shared across the application and properly disposed of when the application shuts down. Takes the settings and injects into the MongoClient constructor to establish a connection to the MongoDB database using the provided connection string. This allows the application to interact with the MongoDB database for performing CRUD operations on employee records.
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
     var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;

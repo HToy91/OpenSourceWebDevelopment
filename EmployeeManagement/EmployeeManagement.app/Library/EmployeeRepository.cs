@@ -21,7 +21,7 @@ public class EmployeeRepository
                 .GetCollection<Employee>(settings.Value.CollectionName);
     }
     
-    // Get all employees
+    // Get all employees. Returns a list of all employee records from the MongoDB collection. Uses the Find method with a filter that matches all documents (emp => true) to retrieve all employee records and returns them as a list.
     public async Task<List<Employee>> GetAsync() 
     {
         return await
